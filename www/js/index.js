@@ -1,51 +1,86 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+
 var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+  name: "My App",
+  version: "1.2.3",
+  pages: [],
+	numLinks: 0,
+	numPages: 0,
+	
+  init: function(){
+  	//add main listeners
+	document.addEventListener("DOMContentLoaded", function(){
+		//device ready listener
+		pages = document.querySelectorAll('[data-role="page"]');	
+		numPages = pages.length;
+		var links = document.querySelectorAll('[data-role="pagelink"]');
+		numLinks = links.length;
+		for(var i=0;i<numLinks; i++){
+			//console.log( links[i] );
+			links[i].addEventListener("click", handleNav, false);	
+		}
+		loadPage(null);
+	});
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+	function handleNav(ev){
+		ev.preventDefault();
+		var href = ev.target.href;
+		
+		// sometimes this works but most of the time it does not.
+		// usually the console error is 
+		//
+		// Uncaught TypeError: Cannot read property 'split' of undefined
+		//
+		// Basically handleNav is undefined - for some reason
+		console.log(href);
+		
+		var parts = href.split("#");
+		loadPage( parts[1] );	
+	  return false;
+	}
+	
+	function loadPage( url ){
+		if(url == null){
+			//home page first call
+			pages[0].style.display = 'block';
+			history.replaceState(null, null, "#home");	
+		}else{
+		//no longer on the home page... show the back
+		document.querySelector('[data-rel="back"]').style.display = "block";
+		
+		for(var i=0; i < numPages; i++){
+		  if(pages[i].id == url){
+			pages[i].style.display = "block";
+			history.pushState("#" + url);	
+		  }else{
+			pages[i].style.display = "none";	
+		  }
+		}
+		}
+	}
 
-        console.log('Received Event: ' + id);
-    }
+  
+	},
+  deviceReady: function( ){
+  	//add Cordova Plugin listeners
+                      
+  },
+  domReady: function( ){
+    //add listeners for pages, links, interface, etc
+    //populate the pages array
+    
+  },
+  somethingElse: function( ){
+                      
+  }
 };
 
-app.initialize();
+app.init();
+
+
+// JavaScript Document
+
+
+
+//Still need a listener for the popstate event to handle the back button
+//Still need a listener for the back button in the header
+
