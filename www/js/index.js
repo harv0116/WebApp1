@@ -8,17 +8,26 @@ var app = {
 	
   init: function(){
   	//add main listeners
-	document.addEventListener("DOMContentLoaded", function(){
+		document.addEventListener("DOMContentLoaded", function(){
 		//device ready listener
 		pages = document.querySelectorAll('[data-role="page"]');	
 		numPages = pages.length;
 		var links = document.querySelectorAll('[data-role="pagelink"]');
 		numLinks = links.length;
 		for(var i=0;i<numLinks; i++){
-			//console.log( links[i] );
+			console.log( links[i] );
 			links[i].addEventListener("click", handleNav, false);	
 		}
 		loadPage(null);
+		
+		 if( navigator.geolocation ){ 		  
+			var params = {enableHighAccuracy: false, timeout:3600, maximumAge:60000};
+			navigator.geolocation.watchPosition( reportPosition, gpsError, params ); 
+		  }else{
+			//browser does not support geolocation api
+			alert("Sorry, your browser does not support location tools.")
+		  }
+		  
 	});
 
 	function handleNav(ev){
@@ -57,16 +66,59 @@ var app = {
 		}
 		}
 	}
+	
+	//add Cordova Plugin listeners
 
-  
+	
+	function reportPosition( position ){ 
+	
+		var width = 400;
+		var height = 400;
+		var can = document.createElement("canvas");
+		can.className = "myCanvas";
+		can.setAttribute("width", width); 
+		can.setAttribute("height", height); 
+		document.getElementById('output').appendChild(can);
+	  
+		var canvasRef = document.querySelector('.myCanvas');
+		var context = canvasRef.getContext('2d');
+		var img = new Image;
+	
+		img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + 
+		position.coords.latitude+ "," + position.coords.longitude + 
+		"&markers=color:red%7Xlabel:X%7C" + position.coords.latitude + 
+		"," + position.coords.longitude +
+		 " &size=400x400&zoom=14&key=AIzaSyB0kyumQiko8guSTwwT7rUweHYqSxXV5Vw";
+	  
+		img.onload = function() {
+		context.drawImage(img, 0, 0);
+	  };
+	}
+	
+	function gpsError( error ){   
+		var errors = {
+			1: 'Permission denied',
+			2: 'Position unavailable',
+			3: 'Request timeout'
+		};
+		alert("Error: " + errors[error.code]);
+	}
+    
 	},
   deviceReady: function( ){
-  	//add Cordova Plugin listeners
-                      
+	  
+	  //put in here when ready to test on phone or simulator
+	  
+	  
+	  
+  	                 
   },
   domReady: function( ){
     //add listeners for pages, links, interface, etc
     //populate the pages array
+	
+	
+	
     
   },
   somethingElse: function( ){
@@ -83,4 +135,5 @@ app.init();
 
 //Still need a listener for the popstate event to handle the back button
 //Still need a listener for the back button in the header
+
 
