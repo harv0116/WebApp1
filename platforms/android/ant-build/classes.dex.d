@@ -1,10 +1,19 @@
-c:\wamp\www\webapp1\platforms\android\ant-build\classes.dex : \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\BuildConfig.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\CordovaApp.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$attr.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$drawable.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$string.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$xml.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\device\Device.class \
-c:\wamp\www\webapp1\platforms\android\ant-build\dexedLibs\classes-870b54e81c4a5a366e5e5cdb10d7c2b8.jar \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes.dex : \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\BuildConfig.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\CordovaApp.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$attr.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$drawable.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$string.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R$xml.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\ca\edumedia\m\harv0116\R.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactAccessor$WhereOptions.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactAccessor.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactAccessorSdk5.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactInfoDTO.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactManager$1.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactManager$2.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactManager$3.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactManager$4.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\contacts\ContactManager.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\classes\org\apache\cordova\device\Device.class \
+C:\wamp\www\webapp1\platforms\android\ant-build\dexedLibs\classes-870b54e81c4a5a366e5e5cdb10d7c2b8.jar \
