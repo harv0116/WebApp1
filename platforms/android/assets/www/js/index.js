@@ -3,11 +3,17 @@ var app = {
   	name: "My App",
   	version: "1.2.3",
   	pages: [],
+	links: [],
 	numLinks: 0,
 	numPages: 0,
+	pageTime: 800,
+	pageshow: document.createEvent("CustomEvent"),
+	
 	
   	init: function(){
-  	//add main listeners
+  	//add main listeners		
+		
+		app.pageshow.initEvent("pageShow", false, true);
 		document.addEventListener("DOMContentLoaded", this.deviceReady);
 	},
   	domReady: function( ){
@@ -18,12 +24,15 @@ var app = {
 		//populate the pages array
 		app.pages = document.querySelectorAll('[data-role="page"]');	
 		app.numPages = app.pages.length;
-		var links = document.querySelectorAll('[data-role="pagelink"]');
-		app.numLinks = links.length;
+		app.links = document.querySelectorAll('[data-role="pagelink"]');
+		app.numLinks = app.links.length;
 		for(var i=0;i<app.numLinks; i++){
-			console.log( links[i] );
-			links[i].addEventListener("click", app.handleNav, false);	
+			console.log( app.links[i] );
+			app.links[i].addEventListener("click", app.handleNav, false);	
 		}
+		for(var p=0; p < app.numPages; p++){
+    		app.pages[p].addEventListener("pageShow", app.handlePageShow, false);
+  		}
 		app.loadPage(null);
 		
 		if( navigator.geolocation ){ 		  
@@ -33,6 +42,7 @@ var app = {
 			//browser does not support geolocation api
 			alert("Sorry, your browser does not support location tools.");
 		}
+		
 		
 		var options = new ContactFindOptions( );
 		options.filter = "";  //leaving this empty will find return all contacts
@@ -48,25 +58,40 @@ var app = {
 		app.loadPage( parts[1] );	
 	  	return false;
   	},
+	handlePageShow: function(ev){
+  		ev.target.className = "active";
+	},
   	loadPage: function(url){
 		if(url == null){
-			//home page first call
-			app.pages[0].style.display = 'block';
-			history.replaceState(null, null, "#home");	
+		//home page first call
+		app.pages[0].className = 'active';
+		history.replaceState(null, null, "#home");	
 		}else{
-		//no longer on the home page... show the back
-			document.querySelector('[data-rel="back"]').style.display = "block";
-		
 			for(var i=0; i < app.numPages; i++){
+			  app.pages[i].className = "hidden";
+			  //get rid of all the hidden classes
+			  //but make them display block to enable anim.
 			  if(app.pages[i].id == url){
-				app.pages[i].style.display = "block";
-				history.pushState("#" + url);	
-			  }else{
-				app.pages[i].style.display = "none";	
+				app.pages[i].className = "show";
+				//add active to the proper page
+				history.pushState(null, null, "#" + url);
+				setTimeout(app.addDispatch, 50, i);
+			  }
+			}
+			//set the activetab class on the nav menu
+			for(var t=0; t < app.numLinks; t++){
+			  app.links[t].className = "";
+			  if(app.links[t].href == location.href){
+				app.links[t].className = "activetab";
 			  }
 			}
 		}
   	},
+	addDispatch: function(num){
+  		app.pages[num].dispatchEvent(app.pageshow);
+  		//num is the value i from the setTimeout call
+  		//using the value here is creating a closure
+	},
   	reportPosition: function(position){
 		var width = 400;
 		var height = 400;

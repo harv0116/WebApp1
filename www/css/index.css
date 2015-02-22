@@ -413,7 +413,8 @@ Mixins & Extensions
 html {
   width: 100%;
   height: 100%;
-  background-color: #333; }
+  background-color: #333;
+  overflow: hidden; }
 
 h2, h3, p {
   padding: 0.2rem 2rem;
@@ -465,10 +466,43 @@ ul.tabs {
         PAGES
 ********************************/
 [data-role="page"] {
-  display: none;
+  /*display:none;*/
   background-color: #FFFFFF;
   color: #000000;
-  width: 100%; }
+  /*width:100%;*/
+  position: absolute;
+  top: 7rem;
+  margin-top: -1px;
+  left: 100%;
+  right: -10px;
+  transition: left 0.5s linear, right 0.5s linear;
+  z-index: 10;
+  /*** Items to trigger hardware acceleration ***/
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+[data-role=page].active {
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background-color: #FFFFFF;
+  border-top: 1px solid #lightgrey; }
+
+[data-role=page].show {
+  display: block; }
+
+[data-role=page].hidden {
+  display: none; }
 
 div#home {
   display: block; }

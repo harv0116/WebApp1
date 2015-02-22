@@ -8,59 +8,45 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link href='http://fonts.googleapis.com/css?family=Francois+One|Bree+Serif' rel='stylesheet' type='text/css'>
         <title>Paul's Awesome App</title>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     </head>
      <body> 
      
      <div data-role="header">
-    <a href="#" data-role="pagelink" data-rel="back">&laquo;Back</a>
     <h1>Paul's Special App</h1>
-  </div>
-     <div id="myApp"> 
-        <div data-role="page" id="home">
-          <ul class="tabs">
-            <li class="tab"><a href="#home" data-role="pagelink" class="active">
-            <img id="homeicon" src="img/home.svg"></a></li>
-            <li class="tab"><a href="#geo" data-role="pagelink" class="">
-            <img id="geoicon" src="img/Compass.svg"></a></li>
-            <li class="tab"><a href="#contact" data-role="pagelink" class="">
-            <img id="conticon" src="img/contacts.svg"></a></li>
-          </ul>
-          <div data-role="content">        
-            <h3>Home Page</h3>
-            <p>My page is so awesome.</p>
-          </div>
-        </div>
+  	</div>
+  <nav>
+    <ul class="tabs">
+        <li class="tab"><a href="#home" data-role="pagelink" class="activetab">
+        <img id="homeicon" src="img/home.svg"></a></li>
+        <li class="tab"><a href="#geo" data-role="pagelink" class="">
+        <img id="geoicon" src="img/Compass.svg"></a></li>
+        <li class="tab"><a href="#contact" data-role="pagelink" class="">
+        <img id="conticon" src="img/contacts.svg"></a></li>
+    </ul>
+    </nav>
     
-        <div data-role="page" id="geo">
-          <ul class="tabs">
-            <li class="tab"><a href="#home" data-role="pagelink" class="">
-            <img id="homeicon" src="img/home.svg"></a></li>
-            <li class="tab"><a href="#geo" data-role="pagelink" class="active">
-            <img id="geoicon" src="img/Compass.svg"></a></li>
-            <li class="tab"><a href="#contact" data-role="pagelink" class="">
-            <img id="conticon" src="img/contacts.svg"></a></li>
-          </ul>
-	    	<div data-role="content">
-            	<h3>Your current location</h3>
-                <div id="output"></div>
-          </div>
-        </div>
+    <div data-role="page" id="home" class="">
+  <div data-role="content">
+    <h3>Home Page</h3>
+    <p>My page is so awesome.</p>
+  </div>
+</div>
+    
+<div data-role="page" id="geo" class="hidden">
+  <div data-role="content">
+    <h3>Your current location</h3>
+    <div id="output"></div>
+  </div>
+</div>
 
-        <div data-role="page" id="contact">
-          <ul class="tabs">
-            <li class="tab"><a href="#home" data-role="pagelink" class="">
-            <img id="homeicon" src="img/home.svg"></a></li>
-            <li class="tab"><a href="#geo" data-role="pagelink" class="">
-            <img id="geoicon" src="img/Compass.svg"></a></li>
-            <li class="tab"><a href="#contact" data-role="pagelink" class="active">
-            <img id="conticon" src="img/contacts.svg"></a></li>
-          </ul>
-	    	<div data-role="content">
-            <h3>Contact of the moment</h3>
-            <div id="displaycontact"></div>
-          </div>
-        </div>    
-	</div>
+<div data-role="page" id="contact" class="hidden">
+  <div data-role="content">
+    <h3>Contact </h3>
+    <div id="displaycontact"></div>
+  </div>
+</div>
+    
     <script type="text/javascript" src="js/index.js"></script>
   </body>
 
