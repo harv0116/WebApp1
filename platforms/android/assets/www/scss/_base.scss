@@ -41,6 +41,11 @@ h2, h3 {
 	font-family:$font-secondary;
 }
 
+#sticky {
+	background-color: $orange;
+	color: $black;
+}
+
 /********************************
         TABS
 ********************************/
@@ -71,7 +76,7 @@ ul.tabs{
 	border-right:1px solid $darkgrey;
 	border-left:1px solid $darkgrey;
 }
-.tabs li.tab a.active{
+.tabs li.tab a.activetab{
 	background-color:$darkgrey;
 	border-top:1px solid $darkgrey;
 	border-right:1px solid $darkgrey;
@@ -87,6 +92,7 @@ ul.tabs{
 	background-color:$white;
 	color: $black;	
 	/*width:100%;*/
+	
 	position:absolute; 
 	top: 7rem; 	
 	margin-top: -1px;
@@ -147,7 +153,7 @@ div#home{
 [data-role="content"] p:last-child{
 	padding-bottom:4rem;
 }
-[data-rel="back"]{
+/*[data-rel="back"]{
 	float:left;
 	color:#fff;	
 	padding:0.3rem 1rem;
@@ -156,4 +162,5 @@ div#home{
   line-height:2.0rem;
   text-decoration:none;
   display:none;
-}
+
+} */

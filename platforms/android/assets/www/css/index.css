@@ -427,6 +427,10 @@ p {
 h2, h3 {
   font-family: "Bree Serif", "Georgia", Cambria, Times New Roman, Times, serif; }
 
+#sticky {
+  background-color: #FF991A;
+  color: #000000; }
+
 /********************************
         TABS
 ********************************/
@@ -456,7 +460,7 @@ ul.tabs {
   border-right: 1px solid #7F7F7F;
   border-left: 1px solid #7F7F7F; }
 
-.tabs li.tab a.active {
+.tabs li.tab a.activetab {
   background-color: #7F7F7F;
   border-top: 1px solid #7F7F7F;
   border-right: 1px solid #7F7F7F;
@@ -529,16 +533,17 @@ div#home {
 [data-role="content"] p:last-child {
   padding-bottom: 4rem; }
 
-[data-rel="back"] {
-  float: left;
-  color: #fff;
-  padding: 0.3rem 1rem;
-  color: #000000;
+/*[data-rel="back"]{
+	float:left;
+	color:#fff;	
+	padding:0.3rem 1rem;
+  color: $black;
   font-size: 1rem;
-  line-height: 2.0rem;
-  text-decoration: none;
-  display: none; }
+  line-height:2.0rem;
+  text-decoration:none;
+  display:none;
 
+} */
 /* = Buttons
 -------------------------------------------------------------------------------------------------------------------- */
 /*@import 'buttons';*/

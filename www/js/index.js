@@ -27,7 +27,7 @@ var app = {
 		app.links = document.querySelectorAll('[data-role="pagelink"]');
 		app.numLinks = app.links.length;
 		for(var i=0;i<app.numLinks; i++){
-			console.log( app.links[i] );
+			//console.log( app.links[i] );
 			app.links[i].addEventListener("click", app.handleNav, false);	
 		}
 		for(var p=0; p < app.numPages; p++){
@@ -43,6 +43,7 @@ var app = {
 			alert("Sorry, your browser does not support location tools.");
 		}
 		
+		document.addEventListener("scroll", app.handleScrolling, false);
 		
 		var options = new ContactFindOptions( );
 		options.filter = "";  //leaving this empty will find return all contacts
@@ -134,6 +135,15 @@ var app = {
 	},
 	errFunc: function ( ) {
 		alert("The contact could not be found");
+	},
+ 	handleScrolling: function (ev){
+ 		var height = window.innerHeight;
+ 		var offset = window.pageYOffset;
+  		var footHeight = 60;
+  		var footer = document.querySelector("#sticky");
+  		footer.style.position = "absolute";
+  		var total = height + offset - footHeight;
+  		footer.style.top = total + "px";
 	}
 };
 
