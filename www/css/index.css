@@ -393,19 +393,6 @@ Mixins & Extensions
 
 /* = Base
 -------------------------------------------------------------------------------------------------------------------- */
-/* Scss Document */
-#homeicon {
-  width: 3rem;
-  height: 3rem; }
-
-#geoicon {
-  width: 3rem;
-  height: 3rem; }
-
-#conticon {
-  width: 3rem;
-  height: 3rem; }
-
 * {
   padding: 0;
   margin: 0; }
@@ -416,20 +403,19 @@ html {
   background-color: #333;
   overflow: hidden; }
 
-h2, h3, p {
-  padding: 0.2rem 2rem;
-  font-size: 1.5rem; }
-
-p {
-  font-family: "Francois One", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1rem; }
+body {
+  height: 100%; }
 
 h2, h3 {
-  font-family: "Bree Serif", "Georgia", Cambria, Times New Roman, Times, serif; }
+  font-family: "Bree Serif", "Georgia", Cambria, Times New Roman, Times, serif;
+  padding: 0.2rem 2rem;
+  font-size: 1.2rem; }
 
-#sticky {
-  background-color: #FF991A;
-  color: #000000; }
+p, ul.desc {
+  font-family: "Francois One", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: .8rem;
+  margin-left: 2rem;
+  margin-right: 2rem; }
 
 /********************************
         TABS
@@ -440,7 +426,7 @@ ul.tabs {
   /*margin-bottom:30px;*/ }
 
 .tabs li.tab {
-  background-color: #7F7F7F;
+  background: #7F7F7F !important;
   float: left;
   display: inline-block;
   width: 33.333%; }
@@ -454,17 +440,17 @@ ul.tabs {
   color: #fff;
   text-decoration: none;
   border: none;
-  background-color: #CCCCCC;
+  background-color: #CCCCCC !important;
   text-align: center;
-  border-top: 1px solid #7F7F7F;
-  border-right: 1px solid #7F7F7F;
-  border-left: 1px solid #7F7F7F; }
+  border-top: 1px solid #7F7F7F !important;
+  border-right: 1px solid #7F7F7F !important;
+  border-left: 1px solid #7F7F7F !important; }
 
 .tabs li.tab a.activetab {
-  background-color: #7F7F7F;
-  border-top: 1px solid #7F7F7F;
-  border-right: 1px solid #7F7F7F;
-  border-left: 1px solid #7F7F7F; }
+  background-color: #7F7F7F !important;
+  border-top: 1px solid #7F7F7F !important;
+  border-right: 1px solid #7F7F7F !important;
+  border-left: 1px solid #7F7F7F !important; }
 
 /********************************
         PAGES
@@ -474,6 +460,7 @@ ul.tabs {
   background-color: #FFFFFF;
   color: #000000;
   /*width:100%;*/
+  padding-bottom: 60px;
   position: absolute;
   top: 7rem;
   margin-top: -1px;
@@ -499,6 +486,7 @@ ul.tabs {
   left: 0;
   right: 0;
   z-index: 5;
+  padding-bottom: 60px;
   background-color: #FFFFFF;
   border-top: 1px solid #lightgrey; }
 
@@ -525,6 +513,18 @@ div#home {
   font-variant: small-caps;
   font-family: "Bree Serif", "Georgia", Cambria, Times New Roman, Times, serif; }
 
+[data-role="footer"] {
+  background-color: #FF991A;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 100; }
+
+[data-role="footer"] h3 {
+  color: #000000;
+  text-align: center; }
+
 [data-role="content"] {
   margin-top: -1px;
   border-top: 1px solid #666;
@@ -533,17 +533,22 @@ div#home {
 [data-role="content"] p:last-child {
   padding-bottom: 4rem; }
 
-/*[data-rel="back"]{
-	float:left;
-	color:#fff;	
-	padding:0.3rem 1rem;
-  color: $black;
-  font-size: 1rem;
-  line-height:2.0rem;
-  text-decoration:none;
-  display:none;
+/*** ICONS  ****/
+#hometab {
+  background: url("../img/home2.png") no-repeat 50% 50%;
+  background-size: 3rem 3rem;
+  text-align: center; }
 
-} */
+#geotab {
+  background: url("../img/compass2.png") no-repeat 50% 50%;
+  background-size: 3rem 3rem;
+  text-align: center; }
+
+#contacttab {
+  background: url("../img/contacts2.png") no-repeat 50% 50%;
+  background-size: 3rem 3rem;
+  text-align: center; }
+
 /* = Buttons
 -------------------------------------------------------------------------------------------------------------------- */
 /*@import 'buttons';*/

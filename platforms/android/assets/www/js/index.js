@@ -6,51 +6,60 @@ var app = {
 	links: [],
 	numLinks: 0,
 	numPages: 0,
-	pageTime: 800,
+	pageTime: 500,
 	pageshow: document.createEvent("CustomEvent"),
 	
+    initialize: function() {
+        this.bindEvents();
+    },
+
+    bindEvents: function() {
+        app.pageshow.initEvent("pageShow", false, true);
+		document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+
+    onDeviceReady: function() {
 	
-  	init: function(){
-  	//add main listeners		
 		
-		app.pageshow.initEvent("pageShow", false, true);
-		document.addEventListener("DOMContentLoaded", this.deviceReady);
-	},
-  	domReady: function( ){
-	  //put in here when ready to test on phone or simulator	                 
-  	},
-  	deviceReady: function( ){
-		//add listeners for pages, links, interface, etc
-		//populate the pages array
+
 		app.pages = document.querySelectorAll('[data-role="page"]');	
 		app.numPages = app.pages.length;
 		app.links = document.querySelectorAll('[data-role="pagelink"]');
 		app.numLinks = app.links.length;
+		
+		/*
+		var mc;
 		for(var i=0;i<app.numLinks; i++){
-			//console.log( app.links[i] );
-			app.links[i].addEventListener("click", app.handleNav, false);	
+			mc = new Hammer(app.links[i]);
+			mc.on("tap", function(ev) { app.HandleNav; });
+			//app.links[i].addEventListener("click", app.handleNav, false);	
 		}
+		*/
+		
+		var tab1 = document.getElementById('hometab');
+		var tab2 = document.getElementById('geotab');
+		var tab3 = document.getElementById('contacttab');
+		var mc1 = new Hammer(tab1);
+		var mc2 = new Hammer(tab2);
+		var mc3 = new Hammer(tab3);
+		
+		mc1.on("tap press", function(ev) {
+    		app.handleNav;
+		});
+		mc2.on("tap press", function(ev) {
+    		app.handleNav;
+		});
+		mc3.on("tap press", function(ev) {
+    		app.handleNav;
+		});
+		
 		for(var p=0; p < app.numPages; p++){
     		app.pages[p].addEventListener("pageShow", app.handlePageShow, false);
   		}
+		
 		app.loadPage(null);
 		
-		if( navigator.geolocation ){ 		  
-			var params = {enableHighAccuracy: false, timeout:3600, maximumAge:60000};
-			navigator.geolocation.watchPosition( app.reportPosition, app.gpsError, params ); 
-		}else{
-			//browser does not support geolocation api
-			alert("Sorry, your browser does not support location tools.");
-		}
-		
-		document.addEventListener("scroll", app.handleScrolling, false);
-		
-		var options = new ContactFindOptions( );
-		options.filter = "";  //leaving this empty will find return all contacts
-		options.multiple = true;  //return multiple results
-		var fields = ["displayName"];    //an array of fields to compare against the options.filter 
-		navigator.contacts.find(fields, app.successFunc, app.errFunc, options);
-		  
+	 
   	},
   	handleNav: function(ev){
 		ev.preventDefault();
@@ -61,12 +70,29 @@ var app = {
   	},
 	handlePageShow: function(ev){
   		ev.target.className = "active";
+		
+		if (ev.currentTarget.id == "contact") 
+		{
+			var options = new ContactFindOptions();
+			options.filter = "";
+			options.multiple = true;
+			var fields = ["displayName"]; 
+			navigator.contacts.find(fields, app.successFunc, app.errFunc, options);	
+		} else if (ev.currentTarget.id == "geo") {
+			if( navigator.geolocation ){ 		  
+				var params = {enableHighAccuracy: true, timeout:9000, maximumAge:5000};
+				navigator.geolocation.watchPosition( app.reportPosition, app.gpsError, params ); 
+			}else{
+				alert("Sorry, your browser does not support location tools.");
+			}	
+		}
 	},
   	loadPage: function(url){
 		if(url == null){
 		//home page first call
 		app.pages[0].className = 'active';
-		history.replaceState(null, null, "#home");	
+		history.replaceState(null, null, "#home");
+			
 		}else{
 			for(var i=0; i < app.numPages; i++){
 			  app.pages[i].className = "hidden";
@@ -90,12 +116,10 @@ var app = {
   	},
 	addDispatch: function(num){
   		app.pages[num].dispatchEvent(app.pageshow);
-  		//num is the value i from the setTimeout call
-  		//using the value here is creating a closure
 	},
   	reportPosition: function(position){
-		var width = 400;
-		var height = 400;
+		var width = 300;
+		var height = 300;
 		var can = document.createElement("canvas");
 		can.className = "myCanvas";
 		can.setAttribute("width", width); 
@@ -110,7 +134,7 @@ var app = {
 		position.coords.latitude+ "," + position.coords.longitude + 
 		"&markers=color:red%7Xlabel:X%7C" + position.coords.latitude + 
 		"," + position.coords.longitude +
-		 " &size=400x400&zoom=14&key=AIzaSyB0kyumQiko8guSTwwT7rUweHYqSxXV5Vw";
+		 " &size=300x300&zoom=14&key=AIzaSyB0kyumQiko8guSTwwT7rUweHYqSxXV5Vw";
 	  
 		img.onload = function() {
 			context.drawImage(img, 0, 0);
@@ -125,30 +149,40 @@ var app = {
 		alert("Error: " + errors[error.code]);
   	},
 	successFunc: function( matches ){
-		// this should give me a count of all the contacts and have their id #s 
-		// for which I can do a search on later to get a specific contact
-			alert("GOT HERE");
-		  for( var i=0; i<matches.length; i++){
-			document.getElementById('displaycontact').appendChild(matches[i].displayName);
-			
-		  }
+		var randomNum = app.getRandomInt(0,matches.length);
+		 
+		var div = document.getElementById("displaycontact");
+		var namep = document.createElement("p");
+		var phone1p = document.createElement("p");
+		var phone2p = document.createElement("p");
+		var hr = document.createElement("hr");
+		
+		namep.innerHTML = matches[randomNum].displayName;
+		
+		for (var j=0; j<matches[randomNum].phoneNumbers.length; j++) 
+		{
+		 	if (j==0) {
+				phone1p.innerHTML = 	
+				matches[randomNum].phoneNumbers[j].type + ": " + 
+				matches[randomNum].phoneNumbers[j].value;
+			} else {
+				phone2p.innerHTML = 
+				matches[randomNum].phoneNumbers[j].type + ": " + 
+				matches[randomNum].phoneNumbers[j].value;
+			}
+		}
+		div.appendChild(namep);
+		div.appendChild(phone1p);
+		div.appendChild(phone2p);
+		div.appendChild(hr);	  
 	},
 	errFunc: function ( ) {
 		alert("The contact could not be found");
 	},
- 	handleScrolling: function (ev){
- 		var height = window.innerHeight;
- 		var offset = window.pageYOffset;
-  		var footHeight = 60;
-  		var footer = document.querySelector("#sticky");
-  		footer.style.position = "absolute";
-  		var total = height + offset - footHeight;
-  		footer.style.top = total + "px";
+	getRandomInt: function (min, max) {
+  		return Math.floor(Math.random() * (max - min)) + min;
 	}
 };
-
-app.init();
-//Still need a listener for the popstate event to handle the back button
-//Still need a listener for the back button in the header
+app.initialize();
 
 

@@ -8,50 +8,63 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link href='http://fonts.googleapis.com/css?family=Francois+One|Bree+Serif' rel='stylesheet' type='text/css'>
         <title>Paul's Awesome App</title>
-        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        
     </head>
-     <body> 
+    <body> 
      
-     <div data-role="header">
-    <h1>Paul's Special App</h1>
-  	</div>
-  <nav>
-    <ul class="tabs">
-        <li class="tab"><a href="#home" data-role="pagelink" class="activetab">
-        <img id="homeicon" src="img/home.svg"></a></li>
-        <li class="tab"><a href="#geo" data-role="pagelink" class="">
-        <img id="geoicon" src="img/Compass.svg"></a></li>
-        <li class="tab"><a href="#contact" data-role="pagelink" class="">
-        <img id="conticon" src="img/contacts.svg"></a></li>
-    </ul>
-    </nav>
+    	<div data-role="header">
+    		<h1>Paul's Awesome App</h1>
+  		</div>
+  		<nav>
+   			<ul class="tabs">
+        		<li class="tab"><a href="#home" data-role="pagelink" id="hometab" class="activetab">
+        			&nbsp;</a></li>
+        		<li class="tab"><a href="#geo" data-role="pagelink" id="geotab">
+        			&nbsp;</a></li>
+        		<li class="tab"><a href="#contact" data-role="pagelink" id="contacttab">
+        			&nbsp;</a></li>
+    		</ul>
+   		</nav>
     
-    <div data-role="page" id="home" class="">
-  <div data-role="content">
-    <h3>Home Page</h3>
-    <p>My page is so awesome.</p>
-  </div>
-</div>
+    	<div data-role="page" id="home" class="">
+  			<div data-role="content">
+    			<h3>Home Page</h3>
+    			<p>My app is so awesome.  Features include:</p>
+    			<ul class="desc">
+                    <li>Three tabs - Home, Location and Contacts.</li>
+                    <li>Only one page is visible at a time</li>
+                    <li>There is a transition between each page</li>
+                    <li>A monochromatic colour scheme</li>
+                    <li>Two font stacks</li>
+                    <li>The 300ms delay is eliminated for touch events.</li>
+                    <li>The Home Page works</li>
+                    <li>The Location Page shows your current location </li>
+                    <li>The contact page shows you a contact from the phone</li>
+                    <li>...AND NO CRASHES</li>
+   				</ul> 
+  			</div>
+		</div>
     
-<div data-role="page" id="geo" class="hidden">
-  <div data-role="content">
-    <h3>Your current location</h3>
-    <div id="output"></div>
-  </div>
-</div>
+        <div data-role="page" id="geo" class="hidden">
+          	<div data-role="content">
+            	<h3>Your current location</h3>
+            	<div id="output"></div>
+          	</div>
+        </div>
 
-<div data-role="page" id="contact" class="hidden">
-  <div data-role="content">
-    <h3>Contact </h3>
-    <div id="displaycontact"></div>
-  </div>
-</div>
+        <div data-role="page" id="contact" class="hidden">
+          	<div data-role="content">
+            	<h3>Contacts</h3>
+            	<div id="displaycontact"></div>
+          	</div>
+        </div>
 
-<div data-role="footer" id="sticky">
-	<p>Made by Paul Harvey - copyright 2015</p>
-    </div>
-    
-    <script type="text/javascript" src="js/index.js"></script>
-  </body>
+        <div data-role="footer" id="sticky">
+            <h3>Paul Harvey &copy;2015</h3>
+        </div>
+    	<script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/hammer.min.js"></script>
+    	<script type="text/javascript" src="js/index.js"></script>
+	</body>
 
 </html>
