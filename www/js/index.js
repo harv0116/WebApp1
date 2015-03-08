@@ -20,49 +20,39 @@ var app = {
 
     onDeviceReady: function() {
 	
+		if( app.detectTouchSupport ){
+		//we have support for touch events in the browser
+			console.log ("browser supports touch events");
+		//add the event listeners for the touch events here.
+		}else{
+		//add the click listeners to the same objects	
+		}
 		
-
 		app.pages = document.querySelectorAll('[data-role="page"]');	
 		app.numPages = app.pages.length;
 		app.links = document.querySelectorAll('[data-role="pagelink"]');
 		app.numLinks = app.links.length;
 		
 		
-		var mc;
-		for(var i=0;i<app.numLinks; i++){
-			mc = new Hammer(app.links[i]);
-			mc.on("tap", function(ev) { app.HandleNav; });
+
+		for(var i=0;i<app.numLinks; i++)
+		{
+			app.links[i].addEventListener("touchend", app.touchHandler, false);
 			//app.links[i].addEventListener("click", app.handleNav, false);	
 		}
-		
-		/*
-		var tab1 = document.getElementById('hometab');
-		var tab2 = document.getElementById('geotab');
-		var tab3 = document.getElementById('contacttab');
-		var mc1 = new Hammer(tab1);
-		var mc2 = new Hammer(tab2);
-		var mc3 = new Hammer(tab3);
-		
-		mc1.on("tap press", function(ev) {
-    		app.handleNav;
-		});
-		mc2.on("tap press", function(ev) {
-    		app.handleNav;
-		});
-		mc3.on("tap press", function(ev) {
-    		app.handleNav;
-		});
-		*/
 		
 		for(var p=0; p < app.numPages; p++){
     		app.pages[p].addEventListener("pageShow", app.handlePageShow, false);
   		}
 		
+
+		
 		app.loadPage(null);
 		
 	 
   	},
-  	handleNav: function(ev){
+
+	handleNav: function(ev){
 		ev.preventDefault();
 		var href = ev.target.href;
 		var parts = href.split("#");
@@ -82,7 +72,7 @@ var app = {
 		} else if (ev.currentTarget.id == "geo") {
 			if( navigator.geolocation ){ 		  
 				var params = {enableHighAccuracy: true, timeout:9000, maximumAge:5000};
-				navigator.geolocation.watchPosition( app.reportPosition, app.gpsError, params ); 
+				navigator.geolocation.getCurrentPosition( app.reportPosition, app.gpsError, params ); 
 			}else{
 				alert("Sorry, your browser does not support location tools.");
 			}	
@@ -182,7 +172,34 @@ var app = {
 	},
 	getRandomInt: function (min, max) {
   		return Math.floor(Math.random() * (max - min)) + min;
-	}
+	},
+	detectTouchSupport: function( ){
+		msGesture = navigator && navigator.msPointerEnabled && navigator.msMaxTouchPoints > 0 && MSGesture;
+		var touchSupport = (("ontouchstart" in window) || msGesture || (window.DocumentTouch && document instanceof DocumentTouch));
+		return touchSupport;
+	},
+	
+	touchHandler: function(ev){
+    //this function will run when the touch events happen
+		if( ev.type == "touchend"){
+		ev.preventDefault();
+		var touch = ev.changedTouches[0];        //this is the first object touched
+		
+		var newEvt = document.createEvent("MouseEvent");	//old method works across browsers, though it is deprecated.
+		/**
+		event.initMouseEvent(type, canBubble, cancelable, view,
+						 detail, screenX, screenY, clientX, clientY,
+						 ctrlKey, altKey, shiftKey, metaKey,
+						 button, relatedTarget); **/
+		newEvt.initMouseEvent("click", true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY);
+		//var newEvt = new MouseEvent("click");				//new method
+		//REF: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.MouseEvent
+		ev.currentTarget.dispatchEvent(newEvt);
+		//change the touchend event into a click event and dispatch it immediately
+		//this will skip the built-in 300ms delay before the click is fired by the browser
+		app.handleNav(ev);
+		}
+}
 };
 app.initialize();
 

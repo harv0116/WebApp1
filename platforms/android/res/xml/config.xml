@@ -11,7 +11,7 @@
     <icon density="hdpi" src="www/icons/plogo_hdpi_72x72.png" />
     <icon density="xhdpi" src="www/icons/plogo_xhdpi_96x96.png" />
     <icon density="xxhdpi" src="www/icons/plogo_xxhdpi.png" />
-    <name>webapp1</name>
+    <name>Pauls Awesome App</name>
     <description>
         A program that does geolocation and contacts
     </description>

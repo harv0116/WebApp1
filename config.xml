@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="ca.edumedia.m.harv0116" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Paul's Awesome App</name>
+    <name>Pauls Awesome App</name>
     <description>
         A program that does geolocation and contacts
     </description>
