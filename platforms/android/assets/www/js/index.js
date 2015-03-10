@@ -8,6 +8,7 @@ var app = {
 	numPages: 0,
 	pageTime: 500,
 	pageshow: document.createEvent("CustomEvent"),
+	can: document.createElement("canvas"),
 	
     initialize: function() {
         this.bindEvents();
@@ -111,11 +112,11 @@ var app = {
   	reportPosition: function(position){
 		var width = 300;
 		var height = 300;
-		var can = document.createElement("canvas");
-		can.className = "myCanvas";
-		can.setAttribute("width", width); 
-		can.setAttribute("height", height); 
-		document.getElementById('output').appendChild(can);
+		
+		app.can.className = "myCanvas";
+		app.can.setAttribute("width", width); 
+		app.can.setAttribute("height", height); 
+		document.getElementById('output').appendChild(app.can);
 	  
 		var canvasRef = document.querySelector('.myCanvas');
 		var context = canvasRef.getContext('2d');
